@@ -15,7 +15,7 @@ class obj:
         print("Python object method called with arguments: %s" % arg1, arg2)
         return 1
 
-    def obj_method_kwargs(self, **kwargs, args):
+    def obj_method_kwargs(self, **kwargs):
         print("Python object method called with arguments:" )
         print(kwargs)
         return 1
