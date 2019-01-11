@@ -5,9 +5,20 @@ package main
 import (
 	"fmt"
 	"github.com/sbinet/go-python"
+	"os"
 )
 
 var PyStr = python.PyString_FromString
+
+
+func init() {
+	os.Setenv("PYTHONPATH", ".")
+	fmt.Println("PYTHONPATH:", os.Getenv("PYTHONPATH"))
+	err := python.Initialize()
+	if err != nil {
+		panic(err.Error())
+	}
+}
 
 
 func import_and_call_func() {
@@ -61,7 +72,18 @@ func import_and_use_obj() {
 	methodCallArgs := newObj.CallMethodObjArgs("obj_method_args", methodArg, methodArgTwo)
 	if methodCallArgs == nil { panic("[METHOD CALL REF] Error calling object method: obj_method_args") }
 	fmt.Printf("[METHOD CALL REF] repr(methodCallArgs) return value = %s\n", python.PyString_AS_STRING(methodCallArgs.Repr()))
+
+	// Now try with kwargs
+	methodArgThree := python.PyDict_New()
+	err = python.PyDict_SetItem(methodArgThree, PyStr("key0"),  PyStr("val0"))
+	if err != nil { panic("[DICT SET REF] Error setting key: methodArgThree") }
+	err = python.PyDict_SetItem(methodArgThree, PyStr("key1"),  PyStr("val1"))
+	if err != nil { panic("[DICT SET REF] Error setting key: methodArgThree") }
+	methodCallkwargs := newObj.CallMethodObjArgs("obj_method_kwargs", methodArgThree)
+	if methodCallkwargs == nil { panic("[METHOD CALL REF] Error calling object method: obj_method_kwargs") }
+	fmt.Printf("[METHOD CALL REF] repr(methodCallkwargs) return value = %s\n", python.PyString_AS_STRING(methodCallkwargs.Repr()))
 }
+
 
 
 func main() {

@@ -6,7 +6,7 @@ This repository includes a simple example on how to use the `go` bindings includ
 ## Usage
 
 ```bash
-$ go build main.go && PYTHONPATH=. ./main
+$ go build main.go && ./main
 ```
 
 ## Documentation
