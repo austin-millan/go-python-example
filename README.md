@@ -3,10 +3,6 @@
 This repository includes a simple example on how to use the `go` bindings included in the 
 [`github.com/sbinet/go-python`](https://github.com/sbinet/go-python) to call a Python function and method.
 
-## Requirements
-
-The `go-python` bindings are only compatible with Python 2.
-
 ## Usage
 
 ```bash
